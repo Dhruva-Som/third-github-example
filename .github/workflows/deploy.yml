@@ -1,0 +1,20 @@
+name: Deployment
+on: push
+jobs: 
+  Setup:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Clone Repository
+      uses: actions/checkout@v3
+    - name: Setup Node with version 18
+      uses: actions/setup-node@v3
+      with: 
+        node-version: 18
+    - name: Install Required Dependency
+      run: npm ci
+    - name: Checking the code formatting
+      run: npm run lint
+    - name: Runing Unit Test Cases
+      run: npm test
+    - name: Build The Application
+      run: npm run build
